@@ -7,7 +7,7 @@ class IconsRepo {
     'To play': Icons.gamepad,
     'Outside': Icons.park,
     'To go': Icons.place,
-    'To buy': Icons.receipt_long,
+    'To buy': Icons.shopping_cart,
     'To make': Icons.hardware,
     'To work': Icons.work,
     'To drink': Icons.local_drink,
