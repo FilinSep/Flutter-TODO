@@ -21,11 +21,29 @@ class HomePage extends StatelessWidget {
               task: 'Hello world132',
             ),
           );
+          tlvm.addTask(
+            TodoItemModel(
+              icon: Icons.access_alarm_sharp,
+              task: 'Hello world1532',
+            ),
+          );
+          tlvm.addTask(
+            TodoItemModel(
+              icon: Icons.access_alarm_sharp,
+              task: 'Hello world1322',
+            ),
+          );
+          tlvm.addTask(
+            TodoItemModel(
+              icon: Icons.access_alarm_sharp,
+              task: 'Hello world1312',
+            ),
+          );
         },
         child: Icon(Icons.add),
       ),
       appBar: AppBar(
-        title: Text('TODO Notifier'),
+        title: Text('Simple TODO'),
         centerTitle: true,
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(1.0),
@@ -34,7 +52,8 @@ class HomePage extends StatelessWidget {
       ),
       body:
           tlvm.todoItems.isNotEmpty
-              ? ListView.builder(
+              ? ListView.separated(
+                separatorBuilder: (context, index) => Divider(),
                 itemBuilder: (context, index) {
                   TodoItemModel model = tlvm.todoItems[index];
 

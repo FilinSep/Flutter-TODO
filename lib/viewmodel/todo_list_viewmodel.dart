@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo/model/todo_item_model.dart';
+import 'package:todo/repo/icons/icons_repo.dart';
 
 class TodoListViewModel extends ChangeNotifier {
   final List<TodoItemModel> todoItems = [];
+  final SharedPreferences prefs;
+  final IconsRepo iconsRepo;
 
   int get length => todoItems.length;
 
@@ -43,7 +47,26 @@ class TodoListViewModel extends ChangeNotifier {
   }
 
   // Working with Shared Preferences
-  TodoListViewModel() {
-    addListener(() {});
+  TodoListViewModel({required this.prefs, required this.iconsRepo}) {
+    addListener(() {
+      List<String> tasks = [];
+      List<String> icons = [];
+      for (var model in todoItems) {
+        tasks.add(model.task);
+        icons.add(iconsRepo.translateIcon(model.icon));
+      }
+
+      prefs.setStringList('tasks', tasks);
+      prefs.setStringList('icons', icons);
+    });
+
+    List<String>? tasks = prefs.getStringList('tasks');
+    List<String>? icons = prefs.getStringList('icons');
+
+    if (tasks == null || tasks.isEmpty) return;
+
+    for (final (index, task) in tasks.indexed) {
+      addTask(TodoItemModel.fromPreferences(iconsRepo, task, icons![index]));
+    }
   }
 }

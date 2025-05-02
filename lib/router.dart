@@ -3,8 +3,8 @@ import 'package:todo/view/home_page/home_page.dart';
 import 'package:todo/view/intro_page/intro_page.dart';
 import 'package:todo/view/todo_page/todo_page.dart';
 
-GoRouter appRouter = GoRouter(
-  initialLocation: '/intro',
+GoRouter appRouter(bool firstTime) => GoRouter(
+  initialLocation: firstTime ? '/intro' : '/home',
   routes: <GoRoute>[
     GoRoute(
       path: '/home',

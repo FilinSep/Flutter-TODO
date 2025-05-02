@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo/repo/icons/icons_repo.dart';
 
 @immutable
 class TodoItemModel {
@@ -8,6 +9,11 @@ class TodoItemModel {
   final String task;
 
   const TodoItemModel({required this.icon, required this.task});
+  factory TodoItemModel.fromPreferences(
+    IconsRepo iconsRepo,
+    String task,
+    String icon,
+  ) => TodoItemModel(icon: iconsRepo.getIcon(icon), task: task);
 
   @override
   bool operator ==(Object other) {
