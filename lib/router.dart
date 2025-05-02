@@ -9,7 +9,20 @@ GoRouter appRouter(bool firstTime) => GoRouter(
     GoRoute(
       path: '/home',
       builder: (context, state) => HomePage(),
-      routes: [GoRoute(path: '/todo', builder: (context, state) => TodoPage())],
+      routes: [
+        GoRoute(
+          path: '/edit/:task',
+          name: 'Edit',
+          builder:
+              (context, state) =>
+                  TodoPage(creating: false, task: state.pathParameters['task']),
+        ),
+        GoRoute(
+          path: '/create',
+          name: 'Create',
+          builder: (context, state) => TodoPage(creating: true),
+        ),
+      ],
     ),
     GoRoute(path: '/intro', builder: (context, state) => IntroPage()),
   ],

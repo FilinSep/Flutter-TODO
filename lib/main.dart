@@ -27,11 +27,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create:
-          (context) => TodoListViewModel(prefs: prefs, iconsRepo: IconsRepo()),
+    return MultiProvider(
+      providers: [
+        Provider(create: (context) => IconsRepo()),
+        ChangeNotifierProvider(
+          create:
+              (context) => TodoListViewModel(
+                prefs: prefs,
+                iconsRepo: context.read<IconsRepo>(),
+              ),
+        ),
+      ],
       child: MaterialApp.router(
-        title: 'Simple TODO',
+        title: 'TODO: Make localization',
         darkTheme: ThemeData.dark(),
         theme: ThemeData.light(),
         themeMode: ThemeMode.system,

@@ -21,6 +21,8 @@ class TodoListViewModel extends ChangeNotifier {
   }
 
   bool canAddTask(String task) {
+    if (task.isEmpty) return false;
+
     for (var item in todoItems) {
       if (item.task == task) {
         return false;
@@ -43,6 +45,12 @@ class TodoListViewModel extends ChangeNotifier {
         notifyListeners();
         break;
       }
+    }
+  }
+
+  TodoItemModel? getModel(String task) {
+    for (var model in todoItems) {
+      if (model.task == task) return model;
     }
   }
 

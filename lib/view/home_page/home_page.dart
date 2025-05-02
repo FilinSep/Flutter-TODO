@@ -14,31 +14,8 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          GoRouter.of(context).push('/home/todo');
-          tlvm.addTask(
-            TodoItemModel(
-              icon: Icons.access_alarm_sharp,
-              task: 'Hello world132',
-            ),
-          );
-          tlvm.addTask(
-            TodoItemModel(
-              icon: Icons.access_alarm_sharp,
-              task: 'Hello world1532',
-            ),
-          );
-          tlvm.addTask(
-            TodoItemModel(
-              icon: Icons.access_alarm_sharp,
-              task: 'Hello world1322',
-            ),
-          );
-          tlvm.addTask(
-            TodoItemModel(
-              icon: Icons.access_alarm_sharp,
-              task: 'Hello world1312',
-            ),
-          );
+          // Push task creating page
+          context.pushNamed('Create');
         },
         child: Icon(Icons.add),
       ),
@@ -83,19 +60,34 @@ class HomePage extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          // This thing uses SizedBox to center task text
                           SizedBox(
                             width: 50,
                             child: Icon(model.icon, size: 50),
                           ),
-                          Text(
-                            model.task,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
+                          SizedBox(
+                            width: 250,
+                            child: Text(
+                              model.task,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ),
-                          SizedBox(width: 50, child: Icon(Icons.edit)),
+                          InkWell(
+                            onTap: () {
+                              // Push task edit page
+                              context.pushNamed(
+                                'Edit',
+                                pathParameters: {'task': model.task},
+                              );
+                            },
+                            child: SizedBox(width: 50, child: Icon(Icons.edit)),
+                          ),
                         ],
                       ),
                     ),
