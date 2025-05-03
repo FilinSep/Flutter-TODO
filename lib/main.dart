@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
         title: 'TODO: Make localization',
         darkTheme: ThemeData.dark(),
         theme: ThemeData.light(),
-        themeMode: ThemeMode.system,
+        themeMode: ThemeMode.light,
         routerConfig: appRouter(getFirstTime(prefs)),
       ),
     );
