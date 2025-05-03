@@ -115,37 +115,40 @@ class _TodoPageState extends State<TodoPage> {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Column(
-              spacing: 10,
-              children: [
-                Text(
-                  'Choose icon',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-                ),
-
-                InkWell(
-                  customBorder: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
+            // SingleChildScrollView to avoid bottom inset
+            child: SingleChildScrollView(
+              child: Column(
+                spacing: 10,
+                children: [
+                  Text(
+                    'Choose icon',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                   ),
-                  onTap:
-                      () => setState(() {
-                        slidingPanelVisible = !slidingPanelVisible;
-                      }),
-                  child: Card(
-                    child: Icon(iconsRepo.getIcon(chosenIcon), size: 200),
-                  ),
-                ),
 
-                Text(
-                  'Task name',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-                ),
-                TextField(
-                  style: TextStyle(fontSize: 20),
-                  controller: _textEditingController,
-                  textAlign: TextAlign.center,
-                ),
-              ],
+                  InkWell(
+                    customBorder: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    onTap:
+                        () => setState(() {
+                          slidingPanelVisible = !slidingPanelVisible;
+                        }),
+                    child: Card(
+                      child: Icon(iconsRepo.getIcon(chosenIcon), size: 200),
+                    ),
+                  ),
+
+                  Text(
+                    'Task name',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                  ),
+                  TextField(
+                    style: TextStyle(fontSize: 20),
+                    controller: _textEditingController,
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
             ),
           ),
           Visibility(
